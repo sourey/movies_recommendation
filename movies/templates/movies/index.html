@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>S4Movies.com</title>
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+</head>
+{% load staticfiles%}
+{% static "" as baseUrl %}
+
+{% load my_filter %}
+
+
+<body>
+<header>
+<h3 align="center">EvergreenMovies.com</h3>
+<h2 align="left"><a href="/movies/recom">Recommendation</a></h2>
+<h2 align="right"><a href="/admin">Admin</a></h2>
+
+</header>
+<div class="container">
+
+
+
+
+ <div class="row">
+ {% for i in movies %}
+  <div class="col-sm-4">
+    <a href="/movies/{{i.id}}"><img src="{{ baseUrl }}{{ i.poster_path }}" class="img-responsive" alt="Cinque Terre" width="304" height="236">
+  <br>
+  <b>{{ i.title }}</b></a><br><b>{{ i.imdb_score}}</b><br>
+  
+ 
+
+  </div>
+  
+ {%endfor%}
+</div>
+
+
+<div class="well well-sm" align="center">
+    <span class="step-links">
+        {% if movies.has_previous %}
+            <a href="?page=1"><button type="button" class="btn btn-info">First</button></a>
+            <a href="?page={{ movies.previous_page_number }}"><button type="button" class="btn btn-info">Previous</button></a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ movies.number }} of {{ movies.paginator.num_pages }}.
+        </span>
+
+        {% if movies.has_next %}
+            <a href="?page={{ movies.next_page_number }}"><button type="button" class="btn btn-info">Next</button></a>
+            <a href="?page={{ movies.paginator.num_pages }}"><button type="button" class="btn btn-info">Last</button></a>
+        {% endif %}
+    </span>
+</div>
+</div>
+</body>
+</html>

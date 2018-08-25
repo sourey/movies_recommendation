@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>S4Movies.com</title>
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+</head>
+{% load staticfiles%}
+{% static "" as baseUrl %}
+
+{% load my_filter %}
+
+
+<body>
+<h3 align="center">EvergreenMovies.com</h3>
+<div class="container">
+<form action="#" method="POST">
+<h4>Please enter the movies that you have watched and get recommendations similar to that movie</h4>
+{%csrf_token%}
+<input type="text" placeholder='eg:The Godfather' name="title">
+
+<input type="submit" value="get recommendations">
+</form>
+
+<h3>{{a}}</h3>
+ {% for i in myvalue %}
+ <div class="row">
+ {% for i in 15|times %}
+  <div class="col-sm-4">
+    <img src="{{ baseUrl }}{{ photo|index:i }}" class="img-responsive" alt="Cinque Terre" width="304" height="236">
+  <br>
+  <b>{{ title|index:i }}</b><br><b>{{ imdb|index:i }}</b><br>
+  
+  {{ genres|index:i }}
+
+  </div>
+ {%endfor%}
+</div>
+{%endfor%}
+</div> 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/z8h3LVb8cl8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</iframe>
+
+
+
+
+
+
+
+</body>
+</html>
